@@ -131,7 +131,6 @@
 	"routes": [
     {
         "pattern": "flowkers.com/*",
-        "custom_domain": false,
         "zone_id": "28b74b307cb0cb4af1a10a7eb541d70d"
     }
 ],
