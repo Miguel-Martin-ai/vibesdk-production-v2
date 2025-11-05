@@ -43,6 +43,11 @@ export enum AIModels {
     // Cerebras models
     CEREBRAS_GPT_OSS = 'cerebras/gpt-oss-120b',
     CEREBRAS_QWEN_3_CODER = 'cerebras/qwen-3-coder-480b',
+	// Together‑hosted open‑source models
+
+    META_LLAMA_3_70B_CHAT = 'meta-llama/Llama-3-70b-chat-hf',
+    MISTRAL_MIXTRAL_8X7B_INSTRUCT = 'mistral/Mixtral-8x7B-Instruct-v0.1',
+    DEEPSEEK_V3 = 'deepseek-ai/DeepSeek-V3',
 }
 
 export interface ModelConfig {
