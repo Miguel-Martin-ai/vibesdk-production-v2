@@ -164,9 +164,10 @@ export type AIModelType = AIModels;
 export const AI_MODELS_TUPLE = Object.values(AIModels) as [AIModels, ...AIModels[]];
 
 export function isValidAIModel(model: string): model is AIModels {
-    return Object.values(AIModels).includes(model as AIModels);
+    const internal = Object.values(AIModels).includes(model as AIModels);
+    const external = typeof model === "string" && model.length > 0; // permite modelos externos (Together)
+    return internal || external;
 }
-
 export function getValidAIModelsArray(): readonly AIModels[] {
     return ALL_AI_MODELS;
 }
