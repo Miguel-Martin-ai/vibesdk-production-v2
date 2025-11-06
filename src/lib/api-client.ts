@@ -64,6 +64,7 @@ import {
     SecurityErrorType,
 } from '@/api-types';
 import { toast } from 'sonner';
+import { togetherChat } from "./together";
 
 /**
  * Global auth modal trigger for 401 interception
