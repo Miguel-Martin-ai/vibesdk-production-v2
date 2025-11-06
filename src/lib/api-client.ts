@@ -1146,7 +1146,30 @@ class ApiClient {
 		window.location.href = oauthUrl.toString();
 	}
 }
-
+export async function callTogetherChat(args: {
+  model: string;
+  messages: { role: "system" | "user" | "assistant"; content: string }[];
+  temperature?: number;
+  max_tokens?: number;
+  stream?: boolean;
+  top_p?: number;
+  stop?: string[];
+}, env: any) {
+  const json = await togetherChat(
+    {
+      model: args.model,
+      messages: args.messages,
+      temperature: args.temperature ?? 0.2,
+      max_tokens: args.max_tokens ?? 2048,
+      stream: args.stream ?? false,
+      top_p: args.top_p ?? 1,
+      stop: args.stop,
+    },
+    env
+  );
+  const content = json?.choices?.[0]?.message?.content ?? "";
+  return { content, raw: json };
+}
 // Export singleton instance
 export const apiClient = new ApiClient();
 
