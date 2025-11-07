@@ -124,14 +124,16 @@ export const AGENT_CONFIG: AgentConfig = {
         temperature: 0.0,
         fallbackModel: AIModels.GEMINI_2_5_PRO,
     },
-    conversationalResponse: {
-        name: AIModels.GEMINI_2_5_FLASH,
-        reasoning_effort: 'low',
+
+  conversationalResponse: {
+        name: "deepseek-ai/DeepSeek-V3" as unknown as AIModels,
+        providerOverride: "together",
+        reasoning_effort: "low",
         max_tokens: 4000,
         temperature: 0,
-        fallbackModel: AIModels.GEMINI_2_5_PRO,
+        fallbackModel: "deepseek-ai/DeepSeek-V3" as unknown as AIModels,
     },
-    codeReview: {
+	codeReview: {
         name: AIModels.GEMINI_2_5_PRO,
         reasoning_effort: 'medium',
         max_tokens: 32000,
