@@ -69,22 +69,6 @@ function accumulateToolCallDelta(
                 name: '',
                 arguments: '',
             },
-			// 🟣 Together AI (DeepSeek, Qwen, etc.)
-    if (
-        modelName === "deepseek-v3" ||
-        modelName === "deepseek-ai/DeepSeek-V3" ||
-        modelName.startsWith("deepseek-") ||
-        modelName.startsWith("deepseek-ai/") ||
-        modelName.includes("together")
-    ) {
-        return {
-            baseURL: "https://api.together.xyz/v1",
-            apiKey: env.TOGETHER_API_KEY,
-            defaultHeaders: {
-                "Content-Type": "application/json",
-            },
-        };
-    }
             __order: orderCounterRef.value++,
             ...(idx !== undefined ? { index: idx } : {}),
         };
