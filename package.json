@@ -6,7 +6,8 @@
 	"scripts": {
 		"setup": "tsx scripts/setup.ts",
 		"dev": "DEV_MODE=true vite",
-		"build": "tsc -b --incremental && vite build",
+		"clean": "rm -rf node_modules/.tmp/*.tsbuildinfo",
+		"build": "npm run clean && tsc -b --incremental && vite build",
 		"lint": "eslint .",
 		"preview": "npm run build && vite preview",
 		"deploy": "bun --env-file .prod.vars scripts/deploy.ts",
