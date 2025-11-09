@@ -126,12 +126,12 @@ export const AGENT_CONFIG: AgentConfig = {
     },
 
   conversationalResponse: {
-        name: "deepseek-ai/DeepSeek-V3" as unknown as AIModels,
+        name: AIModels.TOGETHER_DEEPSEEK_V3,
         providerOverride: "together",
         reasoning_effort: "low",
         max_tokens: 4000,
         temperature: 0,
-        fallbackModel: "deepseek-ai/DeepSeek-V3" as unknown as AIModels,
+        fallbackModel: AIModels.TOGETHER_DEEPSEEK_V3,
     },
 	codeReview: {
         name: AIModels.GEMINI_2_5_PRO,
@@ -167,7 +167,7 @@ export const AI_MODELS_TUPLE = Object.values(AIModels) as [AIModels, ...AIModels
 
 export function isValidAIModel(model: string): model is AIModels {
     const internal = Object.values(AIModels).includes(model as AIModels);
-    const external = typeof model === "string" && model.length > 0; // permite modelos externos (Together)
+    const external = typeof model === "string" && model.length > 0;
     return internal || external;
 }
 export function getValidAIModelsArray(): readonly AIModels[] {

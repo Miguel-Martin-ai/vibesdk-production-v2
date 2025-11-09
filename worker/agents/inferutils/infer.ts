@@ -123,6 +123,7 @@ export async function executeInference<T extends z.AnyZodObject>(   {
                 stream,
                 reasoning_effort: useCheaperModel ? undefined : reasoning_effort,
                 temperature,
+                providerOverride: finalConf.providerOverride,
             }) : await infer({
                 env,
                 metadata: context,
@@ -134,6 +135,7 @@ export async function executeInference<T extends z.AnyZodObject>(   {
                 actionKey: agentActionName,
                 reasoning_effort: useCheaperModel ? undefined : reasoning_effort,
                 temperature,
+                providerOverride: finalConf.providerOverride,
             });
             logger.info(`Successfully completed ${agentActionName} operation`);
             // console.log(result);

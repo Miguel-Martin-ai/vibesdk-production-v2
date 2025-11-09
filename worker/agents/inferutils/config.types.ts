@@ -44,6 +44,10 @@ export enum AIModels {
     CEREBRAS_GPT_OSS = 'cerebras/gpt-oss-120b',
     CEREBRAS_QWEN_3_CODER = 'cerebras/qwen-3-coder-480b',
 	// Together‑hosted open‑source models
+    TOGETHER_META_LLAMA_3_70B_CHAT = 'together/meta-llama/Llama-3-70b-chat-hf',
+    TOGETHER_MISTRAL_MIXTRAL_8X7B = 'together/mistralai/Mixtral-8x7B-Instruct-v0.1',
+    TOGETHER_DEEPSEEK_V3 = 'together/deepseek-ai/DeepSeek-V3',
+    TOGETHER_QWEN_2_5_CODER_32B = 'together/Qwen/Qwen2.5-Coder-32B-Instruct',
 
     META_LLAMA_3_70B_CHAT = 'meta-llama/Llama-3-70b-chat-hf',
     MISTRAL_MIXTRAL_8X7B_INSTRUCT = 'mistral/Mixtral-8x7B-Instruct-v0.1',
@@ -56,6 +60,7 @@ export interface ModelConfig {
     max_tokens?: number;
     temperature?: number;
     fallbackModel?: AIModels | string;
+    providerOverride?: string;
 }
 
 export interface AgentConfig {

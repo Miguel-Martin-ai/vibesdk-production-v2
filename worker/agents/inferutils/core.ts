@@ -186,7 +186,7 @@ function optimizeTextContent(content: string): string {
     return content;
 }
 
-export async function buildGatewayUrl(env: Env, providerOverride?: AIGatewayProviders): Promise<string> {
+export async function buildGatewayUrl(env: Env, providerOverride?: string): Promise<string> {
     // If CLOUDFLARE_AI_GATEWAY_URL is set and is a valid URL, use it directly
     if (env.CLOUDFLARE_AI_GATEWAY_URL && 
         env.CLOUDFLARE_AI_GATEWAY_URL !== 'none' && 
@@ -256,12 +256,13 @@ export async function getConfigurationForModel(
     model: AIModels | string, 
     env: Env, 
     userId: string,
+    providerOverride?: string,
 ): Promise<{
     baseURL: string,
     apiKey: string,
     defaultHeaders?: Record<string, string>,
 }> {
-    let providerForcedOverride: AIGatewayProviders | undefined;
+    let providerForcedOverride: string | undefined;
     // Check if provider forceful-override is set
     const match = model.match(/\[(.*?)\]/);
     if (match) {
@@ -281,8 +282,30 @@ export async function getConfigurationForModel(
                 baseURL: 'https://api.anthropic.com/v1/',
                 apiKey: env.ANTHROPIC_API_KEY,
             };
+        } else if (provider === 'together') {
+            return {
+                baseURL: 'https://api.together.xyz/v1',
+                apiKey: env.TOGETHER_API_KEY,
+            };
         }
-        providerForcedOverride = provider as AIGatewayProviders;
+        providerForcedOverride = provider;
+    }
+
+    // Check if providerOverride is set
+    if (providerOverride === 'together') {
+        return {
+            baseURL: 'https://api.together.xyz/v1',
+            apiKey: env.TOGETHER_API_KEY,
+        };
+    } else if (providerOverride === 'direct') {
+        // Direct provider access - extract provider from model name
+        const directProvider = model.split('/')[0];
+        if (directProvider === 'together') {
+            return {
+                baseURL: 'https://api.together.xyz/v1',
+                apiKey: env.TOGETHER_API_KEY,
+            };
+        }
     }
 
     const baseURL = await buildGatewayUrl(env, providerForcedOverride);
@@ -317,7 +340,7 @@ type InferArgsBase = {
         onChunk: (chunk: string) => void;
     };
     tools?: ToolDefinition<any, any>[];
-    providerOverride?: 'cloudflare' | 'direct';
+    providerOverride?: string;
     userApiKeys?: Record<string, string>;
 };
 
@@ -428,6 +451,7 @@ export async function infer<OutputSchema extends z.AnyZodObject>({
     tools,
     reasoning_effort,
     temperature,
+    providerOverride,
 }: InferArgsBase & {
     schema?: OutputSchema;
     schemaName?: string;
@@ -457,7 +481,7 @@ export async function infer<OutputSchema extends z.AnyZodObject>({
         // Maybe in the future can expand using config object for other stuff like global model configs?
         await RateLimitService.enforceLLMCallsRateLimit(env, userConfig.security.rateLimit, metadata.userId, modelName)
 
-        const { apiKey, baseURL, defaultHeaders } = await getConfigurationForModel(modelName, env, metadata.userId);
+        const { apiKey, baseURL, defaultHeaders } = await getConfigurationForModel(modelName, env, metadata.userId, providerOverride);
         console.log(`baseUrl: ${baseURL}, modelName: ${modelName}`);
 
         // Remove [*.] from model name

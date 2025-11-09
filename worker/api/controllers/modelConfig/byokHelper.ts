@@ -97,6 +97,7 @@ export function getPlatformEnabledProviders(env: Env): string[] {
 		'google-ai-studio',
 		'cerebras',
 		'groq',
+		'together',
 	];
 
 	for (const provider of providerList) {
