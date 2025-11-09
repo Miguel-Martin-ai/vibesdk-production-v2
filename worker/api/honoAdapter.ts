@@ -36,7 +36,7 @@ export function adaptController<T extends BaseController>(
             controller,
             c.req.raw,
             c.env,
-            c.executionCtx,
+            c.executionCtx as ExecutionContext,
             routeContext
         );
     };

@@ -247,4 +247,4 @@ export class RemoteSandboxServiceClient extends BaseSandboxService{
     }
 }
 
-RemoteSandboxServiceClient.init(env.SANDBOX_SERVICE_URL, env.SANDBOX_SERVICE_API_KEY);
+RemoteSandboxServiceClient.init(env.SANDBOX_SERVICE_URL || '', env.SANDBOX_SERVICE_API_KEY || '');
