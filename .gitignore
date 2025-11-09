@@ -43,6 +43,7 @@ debugging.ipynb
 
 #bun.lock
 #*.lock
+package-lock.json
 
 debug-tools/*.json
 # Sentry Config File

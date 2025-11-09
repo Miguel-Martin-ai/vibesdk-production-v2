@@ -56,6 +56,7 @@ export interface ModelConfig {
     max_tokens?: number;
     temperature?: number;
     fallbackModel?: AIModels | string;
+    providerOverride?: 'cloudflare' | 'direct' | 'together' | string;
 }
 
 export interface AgentConfig {

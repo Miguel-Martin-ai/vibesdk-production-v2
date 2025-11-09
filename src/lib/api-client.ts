@@ -2,6 +2,7 @@
  * Unified API Client - Premium quality abstraction for all worker API calls
  * Provides type-safe methods for all endpoints with proper error handling
  * Features 401 response interception to trigger authentication modals
+ * Updated: 2025-11-09
  */
 
 import type{
@@ -1145,7 +1146,7 @@ class ApiClient {
 		window.location.href = oauthUrl.toString();
 	}
 }
-export async function callTogetherChat(args: {
+export async function callTogetherChat(_args: {
   model: string;
   messages: { role: "system" | "user" | "assistant"; content: string }[];
   temperature?: number;
@@ -1153,21 +1154,9 @@ export async function callTogetherChat(args: {
   stream?: boolean;
   top_p?: number;
   stop?: string[];
-}, env: any) {
-  const json = await togetherChat(
-    {
-      model: args.model,
-      messages: args.messages,
-      temperature: args.temperature ?? 0.2,
-      max_tokens: args.max_tokens ?? 2048,
-      stream: args.stream ?? false,
-      top_p: args.top_p ?? 1,
-      stop: args.stop,
-    },
-    env
-  );
-  const content = json?.choices?.[0]?.message?.content ?? "";
-  return { content, raw: json };
+}, _env: any) {
+  // TODO: Implement Together AI chat API call
+  throw new Error("callTogetherChat is not yet implemented");
 }
 // Export singleton instance
 export const apiClient = new ApiClient();
