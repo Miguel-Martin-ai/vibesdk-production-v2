@@ -2,6 +2,7 @@
  * Unified API Client - Premium quality abstraction for all worker API calls
  * Provides type-safe methods for all endpoints with proper error handling
  * Features 401 response interception to trigger authentication modals
+ * Updated: 2025-11-09
  */
 
 import type{

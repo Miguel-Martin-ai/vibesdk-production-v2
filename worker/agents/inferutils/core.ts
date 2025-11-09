@@ -1,3 +1,5 @@
+// AI inference utilities and configuration
+// Updated: 2025-11-09
 import { OpenAI } from 'openai';
 import { Stream } from 'openai/streaming';
 import { z } from 'zod';
