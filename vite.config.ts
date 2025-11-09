@@ -30,7 +30,7 @@ export default defineConfig({
 		svgr(),
 		cloudflare({
 			configPath: 'wrangler.jsonc',
-			experimental: { remoteBindings: true },
+			remoteBindings: true,
 		}), // Add the node polyfills plugin here
 		// nodePolyfills({
 		//     exclude: [
