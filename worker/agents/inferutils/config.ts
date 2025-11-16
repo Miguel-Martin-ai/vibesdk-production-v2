@@ -64,6 +64,29 @@ OR
         temperature: 0.7,
         fallbackModel: AIModels.OPENAI_OSS,
     },
+
+OpenRouter Examples:
+    blueprint: {
+        name: AIModels.OPENROUTER_DEEPSEEK_V3,
+        reasoning_effort: 'medium',
+        max_tokens: 16000,
+        fallbackModel: AIModels.GEMINI_2_5_FLASH,
+        temperature: 0.7,
+    },
+    phaseImplementation: {
+        name: AIModels.OPENROUTER_QWEN_3_CODER,
+        reasoning_effort: 'low',
+        max_tokens: 32000,
+        temperature: 0.2,
+        fallbackModel: AIModels.GEMINI_2_5_PRO,
+    },
+    codeReview: {
+        name: AIModels.OPENROUTER_CLAUDE_SONNET,
+        reasoning_effort: 'medium',
+        max_tokens: 32000,
+        temperature: 0.1,
+        fallbackModel: AIModels.GEMINI_2_5_PRO,
+    },
 */
 
 
