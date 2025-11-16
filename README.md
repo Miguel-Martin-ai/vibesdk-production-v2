@@ -75,7 +75,19 @@ Before clicking "Deploy to Cloudflare", have these ready:
 - Advanced Certificate Manager (needed when you map a first-level subdomain such as `abc.xyz.com` so Cloudflare can issue the required wildcard certificate for preview apps on `*.abc.xyz.com`)
 
 ### 🔑 Required API Key
-- **Google Gemini API Key** - Get from [ai.google.dev](https://ai.google.dev)
+- **Google Gemini API Key** (Recommended) - Get from [ai.google.dev](https://ai.google.dev)
+
+### 🤖 Supported AI Providers
+VibSDK supports multiple AI providers. Choose the one that fits your needs:
+
+- **Google Gemini** (Default) - Free tier available, great performance
+- **OpenRouter** - Access to 100+ models from multiple providers with one API key ([Setup Guide](docs/OPENROUTER_GUIDE.md))
+- **OpenAI** - GPT-4, GPT-4o, and other OpenAI models
+- **Anthropic** - Claude models (Sonnet, Opus, Haiku)
+- **Cerebras** - High-performance open-source models
+- **Custom Providers** - Bring your own compatible API
+
+See [docs/setup.md](docs/setup.md) for detailed configuration of each provider.
 
 Once you click "Deploy to Cloudflare", you'll be taken to your Cloudflare dashboard where you can configure your VibeSDK deployment with these variables. 
 
@@ -83,10 +95,18 @@ Once you click "Deploy to Cloudflare", you'll be taken to your Cloudflare dashbo
 
 ### 🔑 What you'll configure
 
-- `GOOGLE_AI_STUDIO_API_KEY` - Your Google Gemini API key for Gemini models
+**AI Provider Keys** (choose at least one):
+- `GOOGLE_AI_STUDIO_API_KEY` - Google Gemini API key (recommended, free tier available)
+- `OPENROUTER_API_KEY` - OpenRouter API key (access 100+ models, see [OpenRouter Guide](docs/OPENROUTER_GUIDE.md))
+- `OPENAI_API_KEY` - OpenAI API key for GPT models
+- `ANTHROPIC_API_KEY` - Anthropic API key for Claude models
+
+**Security & Authentication:**
 - `JWT_SECRET` - Secure random string for session management
 - `WEBHOOK_SECRET` - Webhook authentication secret
 - `SECRETS_ENCRYPTION_KEY` - Encryption key for secrets
+
+**Deployment Configuration:**
 - `SANDBOX_INSTANCE_TYPE` - Container performance tier (optional, see section below)
 - `ALLOWED_EMAIL` - Email address of the user allowed to use the app. This is used to verify the user's identity and prevent unauthorized access.
 - `CUSTOM_DOMAIN` - Custom domain for your app that you have configured in Cloudflare (**Required**). If you use a first-level subdomain such as `abc.xyz.com`, make sure the Advanced Certificate Manager add-on is active on that zone.
